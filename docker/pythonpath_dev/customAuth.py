@@ -1,3 +1,4 @@
+import logging
 import os
 
 import jwt
@@ -7,7 +8,7 @@ from flask_appbuilder.security.views import AuthDBView
 from flask_login import login_user
 
 from superset.security.manager import SupersetSecurityManager
-
+logger = logging.getLogger()
 
 class CustomAuthDBView(AuthDBView):
     login_template = 'appbuilder/general/security/login_db.html'
@@ -19,7 +20,6 @@ class CustomAuthDBView(AuthDBView):
             token = request.cookies.get('access_token')
         if token is not None:
             try:
-                print(os.environ.get('JWT_SECRET'))
                 jwt_payload = jwt.decode(token, os.environ.get('JWT_SECRET'),
                                          algorithms=['HS256'])
             except:
