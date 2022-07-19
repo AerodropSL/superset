@@ -19,6 +19,7 @@ class CustomAuthDBView(AuthDBView):
             token = request.cookies.get('access_token')
         if token is not None:
             try:
+                print(os.environ.get('JWT_SECRET'))
                 jwt_payload = jwt.decode(token, os.environ.get('JWT_SECRET'),
                                          algorithms=['HS256'])
             except:

@@ -25,6 +25,7 @@ BABEL_DEFAULT_LOCALE = os.environ.get('BABEL_DEFAULT_LOCALE')
 
 #Custom Security manager
 JWT_SECRET = os.environ.get('JWT_SECRET')
+print(JWT_SECRET)
 JWT_ALG = ['HS256']
 CUSTOM_SECURITY_MANAGER = CustomSecurityManager
 
