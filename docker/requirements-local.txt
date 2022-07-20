@@ -1,3 +1,2 @@
-psycopg2-binary==2.8.5
 Flask-Admin==1.5.8
 sqlalchemy_trino==0.5.0
