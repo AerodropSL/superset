@@ -59,7 +59,7 @@ superset/bin/supersetc
 tmp
 rat-results.txt
 superset/app/
-
+docker/.env-prod
 # Node.js, webpack artifacts, storybook
 *.entry.js
 *.js.map
@@ -106,7 +106,5 @@ release.json
 
 # Translation binaries
 messages.mo
-
-docker/requirements-local.txt
 
 cache/

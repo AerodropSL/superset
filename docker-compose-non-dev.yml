@@ -22,50 +22,51 @@ x-superset-volumes: &superset-volumes
   # /app/pythonpath_docker will be appended to the PYTHONPATH in the final container
   - ./docker:/app/docker
   - superset_home:/app/superset_home
+  - ./superset-frontend/src/assets/images:/app/superset/static/assets/images
 
 version: "3.7"
 services:
   redis:
     image: redis:latest
-    container_name: superset_cache
+    container_name: superset_cache_150
     restart: unless-stopped
     volumes:
       - redis:/data
 
   db:
-    env_file: docker/.env-non-dev
+    env_file: docker/.env-prod
     image: postgres:10
-    container_name: superset_db
+    container_name: superset_db_150
     restart: unless-stopped
     volumes:
       - db_home:/var/lib/postgresql/data
 
   superset:
-    env_file: docker/.env-non-dev
+    env_file: docker/.env-prod
     image: *superset-image
-    container_name: superset_app
+    container_name: superset_app_150
     command: ["/app/docker/docker-bootstrap.sh", "app-gunicorn"]
     user: "root"
     restart: unless-stopped
     ports:
-      - 8088:8088
+      - 8102:8088
     depends_on: *superset-depends-on
     volumes: *superset-volumes
 
   superset-init:
     image: *superset-image
-    container_name: superset_init
+    container_name: superset_init_150
     command: ["/app/docker/docker-init.sh"]
-    env_file: docker/.env-non-dev
+    env_file: docker/.env-prod
     depends_on: *superset-depends-on
     user: "root"
     volumes: *superset-volumes
 
   superset-worker:
     image: *superset-image
-    container_name: superset_worker
+    container_name: superset_worker_150
     command: ["/app/docker/docker-bootstrap.sh", "worker"]
-    env_file: docker/.env-non-dev
+    env_file: docker/.env-prod
     restart: unless-stopped
     depends_on: *superset-depends-on
     user: "root"
@@ -73,9 +74,9 @@ services:
 
   superset-worker-beat:
     image: *superset-image
-    container_name: superset_worker_beat
+    container_name: superset_worker_beat_150
     command: ["/app/docker/docker-bootstrap.sh", "beat"]
-    env_file: docker/.env-non-dev
+    env_file: docker/.env-prod
     restart: unless-stopped
     depends_on: *superset-depends-on
     user: "root"

@@ -39,6 +39,9 @@ from superset.utils.core import GenericDataType, MediumText
 if TYPE_CHECKING:
     from superset.db_engine_specs.base import BaseEngineSpec
 
+if TYPE_CHECKING:
+    from superset.db_engine_specs.base import BaseEngineSpec
+
 METRIC_FORM_DATA_PARAMS = [
     "metric",
     "metric_2",
