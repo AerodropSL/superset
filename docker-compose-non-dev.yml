@@ -36,7 +36,7 @@ services:
   superset_db:
     env_file: docker/.env-prod
     image: postgres:10
-    container_name: superset_db_150
+    container_name: superset_db
     restart: unless-stopped
     volumes:
       - db_home:/var/lib/postgresql/data
